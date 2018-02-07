@@ -29,8 +29,8 @@ node("cxs-slave-master") {
     stage('Tag') {
         if(env.PUBLISH_TO_SONATYPE == 'true') {
             sh 'git commit -a -m "New release candidate"'
-            sh 'git tag ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}'
-            sh 'git push https://${env.GIT_USERNAME}:${env.GIT_PASSWD}@github.com/RestComm/media-parent.git ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}'
+            sh "git tag ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}"
+            sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWD}@github.com/RestComm/media-parent.git ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}"
         } else {
             echo 'Skipped code tagging'
         }
