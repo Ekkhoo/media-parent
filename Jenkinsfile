@@ -29,7 +29,7 @@ node("cxs-slave-master") {
     stage('Tag') {
         if(env.PUBLISH_TO_SONATYPE == 'true') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'c2cce724-a831-4ec8-82b1-73d28d1c367a',
+                                credentialsId: 'CXSGithub',
                                 usernameVariable: 'GIT_USERNAME',
                                 passwordVariable: 'GIT_PASSWORD']]) {
                 sh 'git commit -a -m "New release candidate"'
