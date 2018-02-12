@@ -15,7 +15,7 @@ node("cxs-slave-master") {
     }
 
     stage('Tag') {
-            withCredentials([usernamePassword(credentialsId: 'CXSGithub', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            withCredentials([usernamePassword(credentialsId: '590443dc-9487-4e7d-95f0-d70ddf308591', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh 'git commit -a -m "New release candidate"'
                 sh "git tag ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}"
                 sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/RestComm/media-parent.git --tags')
