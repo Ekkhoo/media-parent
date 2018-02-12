@@ -10,8 +10,16 @@ node("cxs-slave-master") {
         checkout scm
     }
 
-    stage ('Versioning') {
-        sh "mvn versions:set -DnewVersion=${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER} -DprocessDependencies=false -DprocessParent=true -Dmaven.test.skip=true"
+//    stage ('Versioning') {
+//        sh "mvn versions:set -DnewVersion=${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER} -DprocessDependencies=false -DprocessParent=true -Dmaven.test.skip=true"
+//    }
+
+    stage('Tag') {
+            withCredentials([usernamePassword(credentialsId: 'CXSGithub', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                sh 'git commit -a -m "New release candidate"'
+                sh "git tag ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}"
+                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/RestComm/media-parent.git --tags')
+            }
     }
 
     stage ('Build') {
@@ -26,17 +34,6 @@ node("cxs-slave-master") {
         }
     }
 
-    stage('Tag') {
-        if(env.PUBLISH_TO_SONATYPE == 'true') {
-            withCredentials([usernamePassword(credentialsId: 'CXSGithub', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh 'git commit -a -m "New release candidate"'
-                sh "git tag ${env.MAJOR_VERSION_NUMBER}-${env.BUILD_NUMBER}"
-                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/RestComm/media-parent.git --tags')
-            }
-        } else {
-            echo 'Skipped code tagging'
-        }
-    }
 
     stage ('Release') {
         if(env.PUBLISH_TO_SONATYPE == 'true') {
