@@ -40,7 +40,7 @@ node("cxs-slave-master") {
 
     stage ('Release') {
         if(env.PUBLISH_TO_SONATYPE == 'true') {
-            sh "mvn -fn clean deploy -Dgpg.passphrase=${env.GPG_PASSPHRASE} -Pattach-sources,generate-javadoc,release-sign-artifacts,cxs-oss-release"
+            sh "mvn clean deploy -Dgpg.passphrase=${env.GPG_PASSPHRASE} -Pattach-sources,generate-javadoc,release-sign-artifacts,cxs-oss-release"
         } else {
             echo 'Skipped deployment to Sonatype'
         }
