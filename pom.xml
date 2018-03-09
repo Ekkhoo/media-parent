@@ -49,6 +49,10 @@
         <!-- Spring Boot -->
         <springframework.boot.version>1.5.9.RELEASE</springframework.boot.version>
 
+        <!-- Netty -->
+        <netty.version>4.1.8.Final</netty.version>
+        <netty.boringssl.version>1.1.33.Fork26</netty.boringssl.version>
+
         <!-- Maven -->
         <maven.compiler.version>3.7.0</maven.compiler.version>
         <maven.surefire.version>2.20.1</maven.surefire.version>
@@ -203,6 +207,18 @@
                         <artifactId>spring-boot-starter-logging</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <!-- Netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-tcnative-boringssl-static</artifactId>
+                <version>${netty.boringssl.version}</version>
             </dependency>
 
             <!-- JAIN MGCP -->
