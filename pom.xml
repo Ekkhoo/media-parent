@@ -63,6 +63,7 @@
         <maven.assembly.version>3.1.0</maven.assembly.version>
         <maven.resources.version>3.0.2</maven.resources.version>
         <maven.dependency.version>3.0.2</maven.dependency.version>
+        <maven.native.version>1.0-alpha-8</maven.native.version>
 
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -349,6 +350,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven.resources.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>${maven.native.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
